@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using hashingNsearching;
 using System.Text;
 
 string str = "Hello! This is Sanjay Mahara";
@@ -40,3 +41,14 @@ foreach (string part in splitToParts)
 }
 string searchWordNow = "MyFamilyFile";
 Console.WriteLine($"The Index says that contains the files is found as {hash.Contains(searchWordNow)}");
+
+//=============Distributed Search Over the Shards Sampled Files============
+
+SearchEngine searchEngine = new SearchEngine();
+string[] filePaths = Directory.GetFiles(".", "*.txt");
+searchEngine.IndexFiles(filePaths);
+
+searchEngine.Search("query", (filePath) =>
+{
+    Console.WriteLine($"Found in: {filePath}");
+});
